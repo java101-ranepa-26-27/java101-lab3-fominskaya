@@ -6,21 +6,22 @@ import java.util.List;
 public class Student {
 
     private final String name;
-    // тут статик поле
     private final long studentID;
     private int course;
     private State state;
     private final List<Integer> grades;
 
-    private Student(String name) {
-        this.studentID = ++id;
+    private Student(long studentID, String name) {
+        this.studentID = studentID;
         this.name = name;
         this.grades = new ArrayList<>();
         this.course = 1;
         this.state = State.ACTIVE;
     }
 
-    // тут статик метод
+    static Student create(long studentID, String name) {
+        return new Student(studentID, name);
+    }
 
     public String getName() {
         return name;
@@ -34,10 +35,12 @@ public class Student {
         if (grades.isEmpty()) {
             return 0.0;
         }
+
         int sum = 0;
         for (int grade : grades) {
             sum += grade;
         }
+
         return (double) sum / grades.size();
     }
 
